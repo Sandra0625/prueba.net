@@ -20,7 +20,7 @@ namespace prueba.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest request)
         {
-            // 🔐 Credenciales en memoria
+            // Credenciales en memoria
             if (request.Username != "admin" || request.Password != "1234")
                 return Unauthorized("Credenciales inválidas");
 
@@ -30,7 +30,7 @@ namespace prueba.Controllers
                 new Claim(ClaimTypes.Name, request.Username)
             };
 
-            // 🔑 Configuración JWT
+            // Configuración JWT
             var jwtSettings = _configuration.GetSection("JwtSettings");
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
